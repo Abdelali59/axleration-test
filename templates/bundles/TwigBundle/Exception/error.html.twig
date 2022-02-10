@@ -1,0 +1,13 @@
+{% extends 'base-error.html.twig' %}
+
+{% block body %}
+    <h2>Error</h2>
+    <h3 class="mt-4">Oops ! La page n'existe pas</h3>
+    <p>Vous vous êtes surement perdu ...</p>
+    <div class="mt-5">
+        <a href="{{ path('app_home') }}"class="btn m-2 m-md-0 btn-primary"><i class="bi bi-house-door-fill"></i> Retour à l'accueil</a>
+        {% if app.user %}
+            <a href="{{ path('app_logout') }}"class="btn m-2 m-md-0 btn-primary"><i class="bi bi-house-door-fill"></i> Se déconnecter</a>
+        {% endif %}
+    </div>
+{% endblock %}

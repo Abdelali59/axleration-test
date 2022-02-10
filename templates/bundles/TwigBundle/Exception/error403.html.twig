@@ -1,0 +1,15 @@
+{% extends 'base-error.html.twig' %}
+
+{% block title %}403{% endblock %}
+{% block body %}
+    <h2>403</h2>
+    <h3 class="mt-4">Oops ! Vous n'avez pas accès à cette ressource</h3>
+    <p>Veuillez contactez l'administrateur du site pour qu'il vous donne accès à cette page</p>
+    <div class="mt-5">
+        <a href="{{ path('app_home') }}"class="btn m-2 m-md-0 btn-primary"><i class="bi bi-house-door-fill"></i> Retour à l'accueil</a>
+        {% if app.user %}
+            <a href="{{ path('app_logout') }}"class="btn m-2 m-md-0 btn-primary"><i class="bi bi-house-door-fill"></i> Se déconnecter</a>
+        {% endif %}
+
+    </div>
+{% endblock %}

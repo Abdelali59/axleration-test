@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter {{ name }}{% endblock %}
+
+{% block body %}
+    <h2 class="title">Ajouter {{ name }}</h2>
+    <hr/>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-primary">Ajouter {{ name }}</button>
+    {{ form_end(form) }}
+
+{% endblock %}

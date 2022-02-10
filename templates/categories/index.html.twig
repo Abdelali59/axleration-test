@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block body %}
+    <h2 class="title">{{ page_title }}</h2>
+    <hr/>
+    <a class="btn btn-primary text-center" style="margin-bottom:15px;" href="{{ path('app_add_category') }}">Ajouter une catégorie</a><br/>
+    {% if categories | length is not same as 0 %}
+        <table class="table table-hover text-center">
+            <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            {% for cat in categories %}
+                <tr>
+                    <td>{{ cat.name }}</td>
+                    <td>
+                        <a class="btn btn-warning" href="{{ path('app_edit_category', {"id": cat.id}) }}">Modifier</a>
+                        <form method="post" style="display:inline-block;" class="form-inline" action="{{ path('app_delete_category', {id: cat.id}) }}">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ cat.id) }}">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Si vous supprimez la catégorie, tous les véhicules qui lui sont liés seront aussi supprimés.\n\r Êtes vous sur de vouloir continuer ?')">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info">Aucune catégorie n'est répertoriée</div>
+    {% endif %}
+{% endblock %}

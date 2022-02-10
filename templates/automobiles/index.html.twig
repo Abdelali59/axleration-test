@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block body %}
+    <h2 class="title">{{ page_title }}</h2>
+    <hr/>
+    <a class="btn btn-primary text-center" style="margin-bottom:15px;" href="{{ path('app_add_auto') }}">Ajouter une automobile</a><br/>
+    {% if automobiles | length is not same as 0 %}
+    <table class="table table-hover text-center">
+        <thead>
+        <tr>
+            <th scope="col">Nom de l'automobile</th>
+            <th scope="col">Catégorie</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        {% for auto in automobiles %}
+            <tr>
+                <td>{{ auto.name }}</td>
+                <td>{{ auto.category.name }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{{ path('app_edit_auto', {"id": auto.id}) }}">Modifier</a>
+                        <form method="post" style="display:inline-block;" class="form-inline" action="{{ path('app_delete_auto', {id: auto.id}) }}">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ auto.id) }}">
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    {% else %}
+        <div class="alert alert-info">Aucune automobile n'est répertoriée</div>
+    {% endif %}
+{% endblock %}
